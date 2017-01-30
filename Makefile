@@ -9,7 +9,7 @@ build:	## Build all docker images
 	docker build -t mbentley/context-root-example:v2 -f Dockerfile.v2 .
 	docker build -t mbentley/context-root-example:v3 -f Dockerfile.v3 .
 
-up:	## Build run example application
+up:	## Build and run example application
 up: build run
 
 run:	## Run example application
