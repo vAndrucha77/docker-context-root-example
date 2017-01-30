@@ -1,0 +1,4 @@
+FROM mbentley/nginx:latest
+
+RUN mkdir /var/www/v2 &&\
+ echo '{"app": "demoapp-v2", "uri": "/v2"}' > /var/www/v2/index.html

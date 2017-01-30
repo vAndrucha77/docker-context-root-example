@@ -1,0 +1,13 @@
+version: "2"
+
+services:
+  router:
+    image: mbentley/context-root-example:router
+    ports:
+      - "80:80"
+  demoapp-v1:
+    image: mbentley/context-root-example:v1
+  demoapp-v2:
+    image: mbentley/context-root-example:v2
+  demoapp-v3:
+    image: mbentley/context-root-example:v3

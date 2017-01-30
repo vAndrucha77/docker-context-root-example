@@ -1,0 +1,5 @@
+FROM mbentley/nginx:latest
+
+RUN mkdir /var/www/v1 &&\
+ echo '{"app": "demoapp-v1", "uri": "/v1"}' > /var/www/v1/index.html &&\
+ chmod -R +r /var/www

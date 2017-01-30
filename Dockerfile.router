@@ -1,0 +1,4 @@
+FROM mbentley/nginx:latest
+
+COPY router.conf /etc/nginx/sites-available/default
+COPY index.html /var/www/index.html
