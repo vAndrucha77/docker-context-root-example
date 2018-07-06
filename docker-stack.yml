@@ -1,0 +1,39 @@
+version: "3"
+
+services:
+  router:
+    image: mbentley/context-root-example:router
+    deploy:
+      mode: replicated
+      replicas: 2
+      update_config:
+        parallelism: 1
+        delay: 5s
+        failure_action: continue
+      labels:
+        - "com.docker.lb.hosts=router.demo.dckr.org"
+        - "com.docker.lb.port=80"
+        - "com.docker.lb.network=router_routerexample"
+    networks:
+      - routerexample
+
+  demoapp-v1:
+    image: mbentley/context-root-example:v1
+    networks:
+      - routerexample
+  demoapp-v2:
+    image: mbentley/context-root-example:v2
+    networks:
+      - routerexample
+  demoapp-v3:
+    image: mbentley/context-root-example:v3
+    networks:
+      - routerexample
+  nginx:
+    image: nginx:alpine
+    networks:
+      - routerexample
+
+networks:
+  routerexample:
+    driver: overlay
