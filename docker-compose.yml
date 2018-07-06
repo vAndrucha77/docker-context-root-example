@@ -11,3 +11,5 @@ services:
     image: mbentley/context-root-example:v2
   demoapp-v3:
     image: mbentley/context-root-example:v3
+  nginx:
+    image: nginx:alpine
