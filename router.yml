@@ -1,0 +1,50 @@
+version: "3"
+
+services:
+  router:
+    image: dtr.andreas.dtcntr.net/docker-cemea/context-root-example:router
+    deploy:
+      mode: replicated
+      replicas: 2
+      update_config:
+        parallelism: 1
+        delay: 5s
+        failure_action: continue
+      labels:
+        - "com.docker.lb.hosts=demoapp.andreas.dtcntr.net"
+        - "com.docker.lb.port=80"
+        - "com.docker.lb.network=router"
+    networks:
+      - router
+  demoapp-v1:
+    image: dtr.andreas.dtcntr.net/docker-cemea/context-root-example:v1
+    networks:
+      - router
+  demoapp-v2:
+    image: dtr.andreas.dtcntr.net/docker-cemea/context-root-example:v2
+    networks:
+      - router
+  demoapp-v3:
+    image: dtr.andreas.dtcntr.net/docker-cemea/context-root-example:v3
+    networks:
+      - router
+  nginx:
+    image: nginx:alpine
+    networks:
+      - router
+  jenkins:
+    image: dtr.andreas.dtcntr.net/docker-cemea/jenkins:2.88
+    environment:
+      - JENKINS_OPTS="--prefix=/jenkins"
+    networks:
+      - router
+  demo:
+    image: ehazlett/docker-demo
+    environment:
+        METADATA: 'demo-context-root'
+    networks:
+      - router
+
+networks:
+  router:
+    driver: overlay

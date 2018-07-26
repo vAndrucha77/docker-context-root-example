@@ -1,0 +1,4 @@
+FROM mbentley/nginx:latest
+
+COPY router_cicd.conf /etc/nginx/sites-available/default/config.conf
+COPY index_cicd.html /var/www/index.html
