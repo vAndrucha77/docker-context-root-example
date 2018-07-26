@@ -16,10 +16,10 @@ Example method to route multiple requests to a single hostname with different ba
     * Replace FQDN's and image referencies in `router_cicd.yml` file. 
     * Add `ports` reference to the yml file if your service will be deployed outside of the `cicdrouter`stack, e.g. for GitLab:
 
-+       ports:
-             - '9080:80'
-             - '9090:443'
-             - '22:22'
+          ports:
+            - '9080:80'
+            - '9090:443'
+            - '22:22'
 
 #### Router configuration
 
