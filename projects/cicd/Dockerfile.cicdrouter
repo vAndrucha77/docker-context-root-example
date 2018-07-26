@@ -1,4 +1,4 @@
 FROM mbentley/nginx:latest
 
-COPY router_cicd.conf /etc/nginx/sites-available/default/config.conf
-COPY index_cicd.html /var/www/index.html
+COPY router.conf /etc/nginx/sites-available/default
+COPY index.html /var/www/index.html

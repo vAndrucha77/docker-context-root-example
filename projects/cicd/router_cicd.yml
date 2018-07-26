@@ -2,7 +2,7 @@ version: "3"
 
 services:
   router:
-    image: dtr.andreas.dtcntr.net/docker-cemea/context-root-example:router
+    image: dtr.andreas.dtcntr.net/docker-cemea/context-root-example:cicdrouter
     deploy:
       mode: replicated
       replicas: 2
@@ -11,38 +11,31 @@ services:
         delay: 5s
         failure_action: continue
       labels:
-        - "com.docker.lb.hosts=demoapp.andreas.dtcntr.net"
+        - "com.docker.lb.hosts=cicd.swarm.andreas.dtcntr.net"
         - "com.docker.lb.port=80"
         - "com.docker.lb.network=router"
     networks:
       - router
-  nginx:
-    image: nginx:alpine
-    networks:
-      - router
+  
   jenkins:
     image: dtr.andreas.dtcntr.net/docker-cemea/jenkins:2.88
     environment:
       - JENKINS_OPTS="--prefix=/jenkins"
     networks:
       - router
-  web:
+
+  gitlab:
    image: 'gitlab/gitlab-ce:latest'
-   hostname: 'demoapp.andreas.dtcntr.net'
+   hostname: 'gitlab'
    environment:
- #   - GITLAB_OMNIBUS_CONFIG="external_url 'http://demoapp.andreas.dtcntr.net:9090/gitlab/; gitlab_rails['gitlab_shell_ssh_port'] = 2224';"
-     - GITLAB_OMNIBUS_CONFIG="external_url 'http://demoapp.andreas.dtcntr.net:9080/gitlab/'"
-   ports:
-     - '9080:9080'
-     - '9090:443'
-     - '22:22'
+     - GITLAB_OMNIBUS_CONFIG=external_url 'http://cicd.swarm.andreas.dtcntr.net/gitlab/';
    volumes:
      - gitlabconfig:/etc/gitlab
      - gitlablogs:/var/log/gitlab
      - gitlabdata:/var/opt/gitlab
    networks:
       - router
-
+    
 volumes:
   gitlabconfig:
   gitlablogs:
