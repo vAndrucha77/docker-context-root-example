@@ -31,8 +31,10 @@ If you want to add additional services to the config, first - add the new backen
  External_url GitLab 
  - https://docs.gitlab.com/omnibus/settings/configuration.html
  - https://docs.gitlab.com/omnibus/docker/#pre-configure-docker-container
- 
+ - https://gitlab.com/gitlab-org/omnibus-gitlab/issues/2331
+  
  How to set contexrt path in Jenkins
  - https://github.com/jenkinsci/docker/issues/68#issuecomment-355572068
 
-
+ JFrog Artifactory
+- https://www.jfrog.com/confluence/plugins/servlet/mobile?contentId=50102720#content/view/50102720
